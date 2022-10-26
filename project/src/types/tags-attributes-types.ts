@@ -5,3 +5,4 @@ export type PlaceCardAttributes = {
   imgWidth: number;
   imgHeight: number;
 }
+

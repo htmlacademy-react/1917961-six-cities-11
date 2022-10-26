@@ -2,6 +2,7 @@ import { PlaceCardAttributes } from '../../types/tags-attributes-types';
 import PlaceCard from '../place-card/place-card';
 import { Offer } from '../../types/data-types/offer-type';
 
+
 const PlaceCardFavorites: PlaceCardAttributes = {
   card: 'cities__card',
   imageWrapper: 'cities__image-wrapper',
@@ -12,11 +13,12 @@ const PlaceCardFavorites: PlaceCardAttributes = {
 
 type PlacesListProps = {
   offers: Offer[];
+  classNameAttribute: string;
 }
 
-function PlacesList({offers}: PlacesListProps): JSX.Element {
+function PlacesList({offers, classNameAttribute}: PlacesListProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={classNameAttribute}>
       {offers.map((offer) => (
         <PlaceCard
           key={`${offer.id}-${offer.title}`.toString()}

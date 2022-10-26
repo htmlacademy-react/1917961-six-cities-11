@@ -1,8 +1,6 @@
 import { PlaceCardAttributes } from '../src/types/tags-attributes-types';
 import { City } from './types/data-types/offer-type';
 
-export const PLACE_COUNT = 10;
-
 export enum AppRoute {
   Login = '/login',
   Room = '/offer/:id',
@@ -119,3 +117,7 @@ export enum TypeOffersSort {
   PriceHigh = 'PriceHigh',
   Top = 'Top'
 }
+
+export const classNamePlacesListForMain = 'cities__places-list places__list tabs__content';
+
+export const classNamePlacesListForProperty = 'near-places__list places__list';
