@@ -55,10 +55,10 @@ export const offersMocks: Offer[] = [
     },
     maxAdults: 8,
     previewImage: 'img/apartment-01.jpg',
-    price: 300,
+    price: 9999,
     rating: 4.5,
     title: 'Best offer in city center',
-    type: 'apartment',
+    type: 'Apartment',
   },
   {
     bedrooms: 1,
@@ -244,7 +244,7 @@ export const offersMocks: Offer[] = [
   }
 ];
 
-export const nearPlacesOffers = [
+export const nearOffersMocks = [
   {
     bedrooms: 2,
     city: {

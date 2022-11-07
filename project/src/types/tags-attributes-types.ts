@@ -6,3 +6,9 @@ export type PlaceCardAttributes = {
   imgHeight: number;
 }
 
+export type BookmarkAttributes = {
+  className: string;
+  width: number;
+  height: number;
+  classNameToActiv: string;
+}
