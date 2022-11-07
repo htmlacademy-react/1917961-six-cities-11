@@ -1,28 +1,39 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../../types/data-types/offer-type';
-import { PlaceCardAttributes} from '../../types/tags-attributes-types';
+import { BookmarkAttributes, PlaceCardAttributes} from '../../types/tags-attributes-types';
+import Bookmark from '../bookmark/bookmark';
 import PremiumMark from '../premium-mark/premium-mark';
 import RatingStars from '../rating-stars/ratind-stars';
+
+const bookmarkAttributesPlaceCard: BookmarkAttributes = {
+  className: 'place-card__bookmark-button',
+  width: 18,
+  height: 19,
+  classNameToActiv: 'place-card__bookmark-button--active'
+};
 
 export type PlaceCardProps = {
   placeCardAttributes: PlaceCardAttributes;
   offer: Offer;
+  onMouseMove?: () => void;
+  onMouseOut?: () => void;
 }
 
-function PlaceCard({placeCardAttributes, offer}: PlaceCardProps): JSX.Element {
-  const { isPremium, isFavorite, previewImage, price, rating, type } = offer;
+function PlaceCard({placeCardAttributes, offer, onMouseMove, onMouseOut}: PlaceCardProps): JSX.Element {
+  const { isPremium, isFavorite, previewImage, price, rating, type, id, title } = offer;
   const { card, imageWrapper, cardInfo, imgWidth, imgHeight } = placeCardAttributes;
   const formatedType = type[0].toUpperCase() + type.slice(1);
   return (
-    <article className={`${card} place-card`}>
+    <article className={`${card} place-card`} onMouseMove={onMouseMove} onMouseOut={onMouseOut}>
       <PremiumMark isPremium={isPremium} className={'place-card__mark'} />
       <div className={`${imageWrapper} place-card__image-wrapper`}>
-        <a href="/">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage}
             width={imgWidth}
             height={imgHeight}
             alt={type}
           />
-        </a>
+        </Link>
       </div>
       <div className={`place-card__info ${cardInfo}`}>
         <div className="place-card__price-wrapper">
@@ -30,12 +41,9 @@ function PlaceCard({placeCardAttributes, offer}: PlaceCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`button place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+
+          <Bookmark isFavorite={isFavorite} bookmarkAttributes={bookmarkAttributesPlaceCard}/>
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -43,7 +51,7 @@ function PlaceCard({placeCardAttributes, offer}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{formatedType}</p>
       </div>
