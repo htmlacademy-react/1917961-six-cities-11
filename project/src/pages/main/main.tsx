@@ -2,16 +2,18 @@ import Header from '../../components/header/header';
 import PlacesList from '../../components/places-list/places-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import Tabs from '../../components/tabs/tabs';
+import Map from '../../components/map/map';
 import { Offer } from '../../types/data-types/offer-type';
-import { classNamePlacesListForMain } from '../../const';
+import { classNamePlacesListForMain, MapСategory } from '../../const';
 import { useState } from 'react';
+import { CityDefault } from '../../mocks/offers-mocks';
 
 type MainProps = {
   offers: Offer[];
 }
 
 function Main({offers}: MainProps): JSX.Element {
-  const [ , setIdActiveOffer ] = useState<number>();
+  const [ activeOffer, setActiveOffer ] = useState<Offer>();
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -26,11 +28,11 @@ function Main({offers}: MainProps): JSX.Element {
               <PlacesList
                 offers={offers}
                 classNameAttribute={classNamePlacesListForMain}
-                setIdActiveOffer={(idActiveOffer: number | undefined) => setIdActiveOffer(idActiveOffer)}
+                setActiveOffer={(offer: Offer | undefined) => setActiveOffer(offer)}
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={CityDefault} offers={offers} activeOffer={activeOffer} className={MapСategory.Cities}/>
             </div>
           </div>
         </div>

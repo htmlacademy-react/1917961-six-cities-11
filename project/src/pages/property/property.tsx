@@ -9,7 +9,9 @@ import PremiumMark from '../../components/premium-mark/premium-mark';
 import RatingStars from '../../components/rating-stars/ratind-stars';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { classNamePlacesListForProperty } from '../../const';
+import Map from '../../components/map/map';
+import { classNamePlacesListForProperty, MapСategory } from '../../const';
+import { CityDefault } from '../../mocks/offers-mocks';
 import { Offer } from '../../types/data-types/offer-type';
 import Review from '../../types/data-types/reviews-type';
 import { BookmarkAttributes } from '../../types/tags-attributes-types';
@@ -30,7 +32,7 @@ type PropertyProps = {
 
 function Property({offers, nearOffers, reviews}: PropertyProps): JSX.Element {
 
-  const [ , setIdActiveOffer ] = useState<number>();
+  const [ activeOffer, setActiveOffer ] = useState<Offer>();
 
   const { id } = useParams();
   if (id === undefined) {
@@ -120,7 +122,7 @@ function Property({offers, nearOffers, reviews}: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map city={CityDefault} offers={offers} activeOffer={activeOffer} className={MapСategory.Property}/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -129,7 +131,7 @@ function Property({offers, nearOffers, reviews}: PropertyProps): JSX.Element {
             <PlacesList
               offers={nearOffers}
               classNameAttribute={classNamePlacesListForProperty}
-              setIdActiveOffer={(idActiveOffer: number | undefined) => setIdActiveOffer(idActiveOffer)}
+              setActiveOffer={(offerActive: Offer | undefined) => setActiveOffer(offerActive)}
             />
 
           </section>

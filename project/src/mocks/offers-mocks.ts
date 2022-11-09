@@ -141,7 +141,7 @@ export const offersMocks: Offer[] = [
     isPremium: true,
     location: {
       latitude:  48.856514,
-      longitude: 2.3522119,
+      longitude: 2.3922119,
       zoom: 16,
     },
     maxAdults: 4,
@@ -156,7 +156,7 @@ export const offersMocks: Offer[] = [
     city: {
       location: {
         latitude:  48.856614,
-        longitude: 2.3522219,
+        longitude: 2.3722219,
         zoom: 13
       },
       name: 'Paris',
@@ -206,7 +206,7 @@ export const offersMocks: Offer[] = [
     city: {
       location: {
         latitude: 50.938361,
-        longitude: 6.959974,
+        longitude: 6.489974,
         zoom: 1,
       },
       name: 'Dusseldorf',
@@ -219,7 +219,7 @@ export const offersMocks: Offer[] = [
       isPro: true,
       name: 'Alex',
     },
-    id: 3,
+    id: 5,
     images: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -232,7 +232,7 @@ export const offersMocks: Offer[] = [
     isPremium: true,
     location: {
       latitude:  51.2277411,
-      longitude: 6.7734556,
+      longitude: 6.9334556,
       zoom: 16,
     },
     maxAdults: 4,
