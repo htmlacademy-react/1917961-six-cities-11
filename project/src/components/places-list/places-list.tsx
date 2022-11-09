@@ -14,18 +14,18 @@ const PlaceCardFavorites: PlaceCardAttributes = {
 type PlacesListProps = {
   offers: Offer[];
   classNameAttribute: string;
-  setIdActiveOffer: (id: number | undefined ) => void;
+  setActiveOffer: (id: Offer | undefined ) => void;
 }
 
-function PlacesList({offers, classNameAttribute, setIdActiveOffer: setActiveOffer}: PlacesListProps): JSX.Element {
+function PlacesList({offers, classNameAttribute, setActiveOffer}: PlacesListProps): JSX.Element {
   return (
     <div className={classNameAttribute}>
-      {offers.map((offer) => (
+      {offers.map((offer, index) => (
         <PlaceCard
-          key={`${offer.id}-${offer.title}`.toString()}
+          key={`${offer.id}-${index}`.toString()}
           offer={offer}
           placeCardAttributes={PlaceCardFavorites}
-          onMouseMove={() => setActiveOffer(offer.id)}
+          onMouseMove={() => setActiveOffer(offer)}
           onMouseOut={() => setActiveOffer(undefined)}
         />
       ))}
