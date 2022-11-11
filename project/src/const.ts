@@ -1,5 +1,6 @@
 import { PlaceCardAttributes } from '../src/types/tags-attributes-types';
-import { City } from './types/data-types/offer-type';
+import { City, Offer } from './types/data-types/offer-type';
+import OptionSorting from './types/option-sorting-type';
 
 export enum AppRoute {
   Login = '/login',
@@ -111,13 +112,36 @@ export const citys = [
   CitysList.Paris,
 ] as const;
 
-export enum TypeOffersSort {
-  Popular = 'Popular',
-  PriceLow = 'PriceLow',
-  PriceHigh = 'PriceHigh',
-  Top = 'Top'
-}
+export const SORT_DEFAULT = 0;
+
+export const ListOptionSorting: OptionSorting[] = [
+  {
+    id: 1,
+    typeSort: 'Popular',
+    titleSort: 'Popular',
+    sort: (offersForSort: Offer[]) => offersForSort.sort((a,b) => a.id - b.id)
+  },
+  {
+    id: 2,
+    typeSort: 'PriceLow',
+    titleSort: 'Price: high to low',
+    sort: (offersForSort: Offer[]) => offersForSort.sort((a,b) => a.price - b.price)
+  },
+  {
+    id: 3,
+    typeSort: 'PriceHigh',
+    titleSort: 'Price: low to high',
+    sort: (offersForSort: Offer[]) => offersForSort.sort((a,b) => b.price - a.price)
+  },
+  {
+    id: 4,
+    typeSort: 'Top',
+    titleSort: 'Top rated first',
+    sort: (offersForSort: Offer[]) => offersForSort.sort((a,b) => b.rating - a.rating)
+  }
+];
 
 export const classNamePlacesListForMain = 'cities__places-list places__list tabs__content';
 
 export const classNamePlacesListForProperty = 'near-places__list places__list';
+
