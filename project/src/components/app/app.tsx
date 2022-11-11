@@ -9,6 +9,7 @@ import Property from '../../pages/property/property';
 import { Offer } from '../../types/data-types/offer-type';
 import Review from '../../types/data-types/reviews-type';
 
+
 type AppProps = {
   offers: Offer[];
   nearOffers: Offer[];
@@ -25,7 +26,7 @@ function App({offers, nearOffers, reviews}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Main}
-          element={<Main offers={offers}/>}
+          element={<Main offers={ offers}/>}
         />
         <Route
           path={AppRoute.Favorites}
