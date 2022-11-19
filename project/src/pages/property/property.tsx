@@ -13,9 +13,9 @@ import Map from '../../components/map/map';
 import { classNamePlacesListForProperty, MapСategory } from '../../const';
 import { CityDefault } from '../../mocks/offers-mocks';
 import { Offer } from '../../types/data-types/offer-type';
-import Review from '../../types/data-types/reviews-type';
 import { BookmarkAttributes } from '../../types/tags-attributes-types';
 import NotFound from '../not-found/not-found';
+import { useAppSelector } from '../../hooks';
 
 const bookmarkAttributesProperty: BookmarkAttributes = {
   className: 'property__bookmark-button',
@@ -24,15 +24,10 @@ const bookmarkAttributesProperty: BookmarkAttributes = {
   classNameToActiv: 'property__bookmark-button--active'
 };
 
-type PropertyProps = {
-  offers: Offer[];
-  nearOffers: Offer[];
-  reviews: Review[];
-}
-
-function Property({offers, nearOffers, reviews}: PropertyProps): JSX.Element {
+function Property(): JSX.Element {
 
   const [ activeOffer, setActiveOffer ] = useState<Offer>();
+  const { offers, nearOffers, reviews } = useAppSelector((state) => state);
 
   const { id } = useParams();
   if (id === undefined) {

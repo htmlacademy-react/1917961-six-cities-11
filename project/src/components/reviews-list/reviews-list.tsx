@@ -1,5 +1,5 @@
 import React from 'react';
-import Review from '../../types/data-types/reviews-type';
+import { Review } from '../../types/data-types/reviews-type';
 import ReviewItem from '../review-item/review-item';
 
 type ReviewsListProps = {

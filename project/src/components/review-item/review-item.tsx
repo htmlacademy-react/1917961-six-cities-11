@@ -1,4 +1,4 @@
-import Review from '../../types/data-types/reviews-type';
+import { Review } from '../../types/data-types/reviews-type';
 import RatingStars from '../rating-stars/ratind-stars';
 
 type ReviewProps = {
