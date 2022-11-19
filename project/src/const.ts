@@ -1,6 +1,6 @@
 import { PlaceCardAttributes } from '../src/types/tags-attributes-types';
 import { City, Offer } from './types/data-types/offer-type';
-import OptionSorting from './types/option-sorting-type';
+import { OptionSorting } from './types/option-sorting-type';
 
 export enum AppRoute {
   Login = '/login',
@@ -125,7 +125,7 @@ export const ListOptionSorting: OptionSorting[] = [
     id: 2,
     typeSort: 'PriceLow',
     titleSort: 'Price: high to low',
-    sort: (offersForSort: Offer[]) => offersForSort.sort((a,b) => a.price - b.price)
+    sort: (offersForSort: Offer[]) => offersForSort.sort((a, b) => a.price - b.price)
   },
   {
     id: 3,
