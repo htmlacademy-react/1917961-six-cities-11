@@ -7,7 +7,12 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import Property from '../../pages/property/property';
 import { Offer } from '../../types/data-types/offer-type';
-import Review from '../../types/data-types/reviews-type';
+import { Review } from '../../types/data-types/reviews-type';
+import { useAppDispatch } from '../../hooks';
+import { fillNearOffers, fillOffers, fillReviews, selectCity } from '../../store/action';
+import { nearOffersMocks, offersMocks } from '../../mocks/offers-mocks';
+import { reviewsMocks } from '../../mocks/reviews-mocks';
+import { CitysList } from '../../const';
 
 
 type AppProps = {
@@ -17,6 +22,12 @@ type AppProps = {
 }
 
 function App({offers, nearOffers, reviews}: AppProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(fillOffers(offersMocks));
+  dispatch(fillNearOffers(nearOffersMocks));
+  dispatch(selectCity(CitysList.Paris));
+  dispatch(fillReviews(reviewsMocks));
+
   return (
     <BrowserRouter>
       <Routes>
@@ -26,19 +37,19 @@ function App({offers, nearOffers, reviews}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Main}
-          element={<Main offers={ offers}/>}
+          element={<Main />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <Favorites offers={offers}/>
+              <Favorites />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Room}
-          element={<Property offers={offers} nearOffers={nearOffers} reviews={reviews}/>}
+          element={<Property />}
         />
         <Route
           path='*'

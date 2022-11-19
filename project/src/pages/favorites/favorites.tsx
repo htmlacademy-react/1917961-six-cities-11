@@ -1,13 +1,10 @@
 import FavoritesLocationItem from '../../components/favorites-location-item/favorites-location-item';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { Offer } from '../../types/data-types/offer-type';
+import { useAppSelector } from '../../hooks';
 
-type FavoritesProps = {
-  offers: Offer[];
-}
-
-function Favorites ({offers}: FavoritesProps): JSX.Element {
+function Favorites (): JSX.Element {
+  const { offers } = useAppSelector((state) => state);
 
   const citys = [...new Set(offers.map((offer) => offer.city.name))];
   const favoritList = citys.map((city) => {

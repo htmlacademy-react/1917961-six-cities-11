@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react';
 import { Icon, Marker } from 'leaflet';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import {City, Offer} from '../../types/data-types/offer-type';
 import 'leaflet/dist/leaflet.css';
 
@@ -29,13 +29,16 @@ function Map({city, offers, activeOffer, className}: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    const markers: Marker<unknown>[] = [];
     if (map) {
+      const { latitude, longitude, zoom } = city.location;
+      map.setView([latitude, longitude], zoom);
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
-
+        markers.push(marker);
         marker
           .setIcon(
             activeOffer !== undefined && offer.id === activeOffer.id
@@ -45,7 +48,12 @@ function Map({city, offers, activeOffer, className}: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map, offers, activeOffer]);
+    return () => {
+      if (map) {
+        markers.forEach((marker) => map.removeLayer(marker));
+      }
+    };
+  }, [map, offers, activeOffer, city.location]);
 
   return <div className={`map ${className}`} ref={mapRef} />;
 
