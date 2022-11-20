@@ -29,10 +29,16 @@ function Map({city, offers, activeOffer, className}: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    const markers: Marker<unknown>[] = [];
     if (map) {
       const { latitude, longitude, zoom } = city.location;
       map.setView([latitude, longitude], zoom);
+    }
+  }, [map, city]);
+
+  useEffect(() => {
+    const markers: Marker<unknown>[] = [];
+    if (map) {
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -53,7 +59,7 @@ function Map({city, offers, activeOffer, className}: MapProps): JSX.Element {
         markers.forEach((marker) => map.removeLayer(marker));
       }
     };
-  }, [map, offers, activeOffer, city.location]);
+  }, [map, offers, activeOffer]);
 
   return <div className={`map ${className}`} ref={mapRef} />;
 

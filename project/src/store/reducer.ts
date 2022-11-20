@@ -8,7 +8,7 @@ const initialState = {
   selectedCity: CitysList.Paris,
   offers: [] as Offer[],
   nearOffers: [] as Offer[],
-  reviews: [] as Review[]
+  reviews: [] as Review[],
 };
 
 const reducer = createReducer(initialState, (builder) => {
