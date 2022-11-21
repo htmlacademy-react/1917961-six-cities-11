@@ -4,9 +4,9 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 import Tabs from '../../components/tabs/tabs';
 import Map from '../../components/map/map';
 import { Offer } from '../../types/data-types/offer-type';
-import { CitysListLocation, classNamePlacesListForMain, MapСategory } from '../../const';
+import { classNamePlacesListForMain, MapСategory } from '../../const';
 import { useState } from 'react';
-import { CityDefault } from '../../mocks/offers-mocks';
+//import { CityDefault } from '../../mocks/offers-mocks';
 import { useAppSelector } from '../../hooks';
 
 function Main(): JSX.Element {
@@ -15,13 +15,13 @@ function Main(): JSX.Element {
   const { selectedCity, offers } = useAppSelector((state) => state);
   const offersCount = offers.length;
   const isEmptyOffers = !offersCount;
-  const cityLocation = ()=> {
-    const findLocation = CitysListLocation.find((element) => (element.name === selectedCity));
-    if (findLocation !== undefined) {
-      return findLocation;
-    }
-    return CityDefault;
-  };
+  //const cityLocation = ()=> {
+  //  const findLocation = CitysListLocation.find((element) => (element.name === selectedCity));
+  //  if (findLocation !== undefined) {
+  //    return findLocation;
+  //  }
+  //  return selectedCity;
+  //};
 
   return (
     <div className="page page--gray page--main">
@@ -41,7 +41,7 @@ function Main(): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              <Map city={cityLocation()} offers={offers} activeOffer={activeOffer} className={MapСategory.Cities}/>
+              <Map city={selectedCity} offers={offers} activeOffer={activeOffer} className={MapСategory.Cities}/>
             </div>
           </div>
         </div>

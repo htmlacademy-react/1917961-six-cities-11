@@ -1,7 +1,7 @@
 import { OptionSorting } from '../../types/option-sorting-type';
 import { MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fillOffers } from '../../store/action';
+import { loadOffers } from '../../store/action';
 
 type PlacesOptionProps = {
   isActive: boolean;
@@ -18,7 +18,7 @@ function PlacesOption({isActive, optionSorting, setTypeOffersSort}: PlacesOption
       onClick={(evt: MouseEvent<HTMLElement>) => {
         evt.preventDefault();
         setTypeOffersSort(optionSorting);
-        dispatch(fillOffers(optionSorting.sort(offersForSort)));
+        dispatch(loadOffers(optionSorting.sort(offersForSort)));
       }}
     >
       {optionSorting.titleSort}

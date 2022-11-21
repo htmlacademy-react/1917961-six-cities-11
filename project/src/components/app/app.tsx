@@ -6,27 +6,25 @@ import Favorites from '../../pages/favorites/favorites';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import Property from '../../pages/property/property';
-import { Offer } from '../../types/data-types/offer-type';
-import { Review } from '../../types/data-types/reviews-type';
-import { useAppDispatch } from '../../hooks';
-import { fillNearOffers, fillOffers, fillReviews, selectCity } from '../../store/action';
-import { nearOffersMocks, offersMocks } from '../../mocks/offers-mocks';
-import { reviewsMocks } from '../../mocks/reviews-mocks';
-import { CitysList } from '../../const';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
-type AppProps = {
-  offers: Offer[];
-  nearOffers: Offer[];
-  reviews: Review[];
-}
+function App(): JSX.Element {
+  //const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isQuestionsDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-function App({offers, nearOffers, reviews}: AppProps): JSX.Element {
-  const dispatch = useAppDispatch();
-  dispatch(fillOffers(offersMocks));
-  dispatch(fillNearOffers(nearOffersMocks));
-  dispatch(selectCity(CitysList.Paris));
-  dispatch(fillReviews(reviewsMocks));
+  if (authorizationStatus === AuthorizationStatus.Unknown || isQuestionsDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  //dispatch(loadOffers(offersMocks));
+  //dispatch(loadNearOffers(nearOffersMocks));
+  //dispatch(selectCity(CitysList.Paris));
+  //dispatch(loadReviews(reviewsMocks));
 
   return (
     <BrowserRouter>
@@ -42,7 +40,7 @@ function App({offers, nearOffers, reviews}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <Favorites />
             </PrivateRoute>
           }
