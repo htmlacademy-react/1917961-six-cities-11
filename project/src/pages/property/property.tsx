@@ -11,7 +11,6 @@ import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import { classNamePlacesListForProperty, MapСategory } from '../../const';
-import { CityDefault } from '../../mocks/offers-mocks';
 import { Offer } from '../../types/data-types/offer-type';
 import { BookmarkAttributes } from '../../types/tags-attributes-types';
 import NotFound from '../not-found/not-found';
@@ -27,7 +26,7 @@ const bookmarkAttributesProperty: BookmarkAttributes = {
 function Property(): JSX.Element {
 
   const [ activeOffer, setActiveOffer ] = useState<Offer>();
-  const { offers, nearOffers, reviews } = useAppSelector((state) => state);
+  const { selectedCity, offers, nearOffers, reviews } = useAppSelector((state) => state);
 
   const { id } = useParams();
   if (id === undefined) {
@@ -117,7 +116,7 @@ function Property(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map city={CityDefault} offers={offers} activeOffer={activeOffer} className={MapСategory.Property}/>
+          <Map city={selectedCity} offers={offers} activeOffer={activeOffer} className={MapСategory.Property}/>
         </section>
         <div className="container">
           <section className="near-places places">

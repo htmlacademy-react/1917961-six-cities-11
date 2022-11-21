@@ -1,6 +1,14 @@
 import { PlaceCardAttributes } from '../src/types/tags-attributes-types';
-import { City, Offer } from './types/data-types/offer-type';
+import { CitysList, Offer } from './types/data-types/offer-type';
 import { OptionSorting } from './types/option-sorting-type';
+
+export const TIMEOUT_SHOW_ERROR = 5000;
+
+export enum APIRoute {
+  Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
 
 export enum AppRoute {
   Login = '/login',
@@ -43,8 +51,8 @@ export const PlaceCardFavorites: PlaceCardAttributes = {
   imgHeight: 200
 };
 
-export const CitysListLocation: City[] = [
-  {
+export const CITY_LIST: CitysList = {
+  Hamburg: {
     name: 'Hamburg',
     location: {
       latitude:  53.5510846,
@@ -52,7 +60,7 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   },
-  {
+  Dusseldorf: {
     name: 'Dusseldorf',
     location: {
       latitude:  51.2277411,
@@ -60,7 +68,7 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   },
-  {
+  Paris: {
     name: 'Paris',
     location: {
       latitude:  48.856614,
@@ -68,7 +76,7 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   },
-  {
+  Cologne: {
     name: 'Cologne',
     location: {
       latitude:  50.93753,
@@ -76,7 +84,7 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   },
-  {
+  Brussels: {
     name: 'Brussels',
     location: {
       latitude:  50.8476424,
@@ -84,7 +92,7 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   },
-  {
+  Amsterdam: {
     name: 'Amsterdam',
     location: {
       latitude:  52.367735,
@@ -92,24 +100,15 @@ export const CitysListLocation: City[] = [
       zoom: 13
     }
   }
-];
-
-export enum CitysList {
-  Hamburg = 'Hamburg',
-  Dusseldorf = 'Dusseldorf',
-  Paris = 'Paris',
-  Cologne = 'Cologne',
-  Brussels = 'Brussels',
-  Amsterdam = 'Amsterdam',
-}
+};
 
 export const citys = [
-  CitysList.Cologne,
-  CitysList.Hamburg,
-  CitysList.Dusseldorf,
-  CitysList.Brussels,
-  CitysList.Amsterdam,
-  CitysList.Paris,
+  CITY_LIST.Cologne,
+  CITY_LIST.Hamburg,
+  CITY_LIST.Dusseldorf,
+  CITY_LIST.Brussels,
+  CITY_LIST.Amsterdam,
+  CITY_LIST.Paris,
 ] as const;
 
 export const SORT_DEFAULT = 0;

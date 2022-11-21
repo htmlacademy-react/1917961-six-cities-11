@@ -1,13 +1,18 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CitysList } from '../const';
-import { Offer } from '../types/data-types/offer-type';
+import { AuthorizationStatus } from '../const';
+import { City, Offer } from '../types/data-types/offer-type';
 import { Review } from '../types/data-types/reviews-type';
 
-export const selectCity = createAction('main/selectCity', (value: CitysList) => ({payload: value}));
+export const selectCity = createAction('main/selectCity', (value: City) => ({payload: value}));
 
-export const fillOffers = createAction('main/fillOffers', (value: Offer[]) => ({payload: value}));
+export const loadOffers = createAction('main/loadOffers', (value: Offer[]) => ({payload: value}));
 
-export const fillNearOffers = createAction('property/fillNearOffers', (value: Offer[]) => ({payload: value}));
+export const loadNearOffers = createAction('property/loadNearOffers', (value: Offer[]) => ({payload: value}));
 
-export const fillReviews = createAction('property/fillReviews', (value: Review[]) => ({payload: value}));
+export const loadReviews = createAction('property/loadReviews', (value: Review[]) => ({payload: value}));
 
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string | null>('game/setError');
+
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOFFERSDataLoadingStatus');

@@ -34,3 +34,7 @@ export type Offer = {
   title: string;
   type: string;
 };
+
+export type CitysList = {
+  [propertyName: string]: City;
+};
