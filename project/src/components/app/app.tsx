@@ -9,9 +9,7 @@ import Property from '../../pages/property/property';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-
 function App(): JSX.Element {
-  //const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isQuestionsDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
@@ -20,11 +18,6 @@ function App(): JSX.Element {
       <LoadingScreen />
     );
   }
-
-  //dispatch(loadOffers(offersMocks));
-  //dispatch(loadNearOffers(nearOffersMocks));
-  //dispatch(selectCity(CitysList.Paris));
-  //dispatch(loadReviews(reviewsMocks));
 
   return (
     <BrowserRouter>

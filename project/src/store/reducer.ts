@@ -2,26 +2,30 @@ import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITY_LIST } from '../const';
 import { City, Offer } from '../types/data-types/offer-type';
 import { Review } from '../types/data-types/reviews-type';
-import { loadNearOffers, selectCity, loadReviews, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
+import { loadNearOffers, selectCity, loadReviews, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus, setFavoriteOffersDataLoadingStatus } from './action';
 
 type InitialState = {
   selectedCity: City;
+  isOffersDataLoading: boolean;
   offers: Offer[];
   nearOffers: Offer[];
   reviews: Review[];
   authorizationStatus: AuthorizationStatus;
   error: string | null;
-  isOffersDataLoading: boolean;
+  isFavoriteOffersDataLoding: boolean;
+  favoriteOffers: Offer[];
 }
 
 const initialState: InitialState = {
   selectedCity: CITY_LIST.Paris,
+  isOffersDataLoading: false,
   offers: [],
   nearOffers: [],
   reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
-  isOffersDataLoading: false,
+  isFavoriteOffersDataLoding: false,
+  favoriteOffers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -46,6 +50,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setFavoriteOffersDataLoadingStatus, (state, action) => {
+      state.isFavoriteOffersDataLoding = action.payload;
     });
 });
 

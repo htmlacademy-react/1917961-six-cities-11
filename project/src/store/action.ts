@@ -11,8 +11,13 @@ export const loadNearOffers = createAction('property/loadNearOffers', (value: Of
 
 export const loadReviews = createAction('property/loadReviews', (value: Review[]) => ({payload: value}));
 
+export const loadFavoriteOffers = createAction('main/loadFavoriteOffers', (value: Offer[]) => ({payload: value}));
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('game/setError');
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOFFERSDataLoadingStatus');
+
+export const setFavoriteOffersDataLoadingStatus = createAction<boolean>('data/setFavoriteOffersDataLoadingStatus');
+
