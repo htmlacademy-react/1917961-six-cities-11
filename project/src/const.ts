@@ -2,12 +2,13 @@ import { PlaceCardAttributes } from '../src/types/tags-attributes-types';
 import { CitysList, Offer } from './types/data-types/offer-type';
 import { OptionSorting } from './types/option-sorting-type';
 
-export const TIMEOUT_SHOW_ERROR = 5000;
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite',
 }
 
 export enum AppRoute {

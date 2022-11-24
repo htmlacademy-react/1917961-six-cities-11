@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
+import { loadFavoriteOffers, loadOffers, requireAuthorization, setError, setFavoriteOffersDataLoadingStatus, setOffersDataLoadingStatus } from './action';
 import {saveToken, dropToken} from '../services/token';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -30,6 +30,20 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Offer[]>(APIRoute.Hotels);
     dispatch(setOffersDataLoadingStatus(false));
     dispatch(loadOffers(data));
+  },
+);
+
+export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setFavoriteOffersDataLoadingStatus(true));
+    const {data} = await api.get<Offer[]>(APIRoute.Favorite);
+    dispatch(setFavoriteOffersDataLoadingStatus(false));
+    dispatch(loadFavoriteOffers(data));
   },
 );
 

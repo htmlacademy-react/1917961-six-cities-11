@@ -15,13 +15,6 @@ function Main(): JSX.Element {
   const { selectedCity, offers } = useAppSelector((state) => state);
   const offersCount = offers.length;
   const isEmptyOffers = !offersCount;
-  //const cityLocation = ()=> {
-  //  const findLocation = CitysListLocation.find((element) => (element.name === selectedCity));
-  //  if (findLocation !== undefined) {
-  //    return findLocation;
-  //  }
-  //  return selectedCity;
-  //};
 
   return (
     <div className="page page--gray page--main">
