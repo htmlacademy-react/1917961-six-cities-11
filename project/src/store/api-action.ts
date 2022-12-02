@@ -1,16 +1,19 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { loadFavoriteOffers, loadOffers, requireAuthorization, setError, setFavoriteOffersDataLoadingStatus, setOffersDataLoadingStatus } from './action';
+import { loadFavoriteOffers, loadNearOffers, loadOffers, loadProperty, loadReviews, requireAuthorization, setBookmark, setError, setOffersDataLoadingStatus, setPropertyDataLoadingStatus } from './action';
 import {saveToken, dropToken} from '../services/token';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { Offer } from '../types/data-types/offer-type';
 import { store } from './index';
+import { Review } from '../types/data-types/reviews-type.js';
+import { BookmarkData } from '../types/bookmark-data.js';
+import { Comment } from '../types/data-types/reviews-type';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'main/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
@@ -38,12 +41,103 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
+  'data/fetchFavorites',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setFavoriteOffersDataLoadingStatus(true));
+    //dispatch(setDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Favorite);
-    dispatch(setFavoriteOffersDataLoadingStatus(false));
+    //dispatch(setDataLoadingStatus(false));
     dispatch(loadFavoriteOffers(data));
+  },
+);
+
+export const fetchPropertyAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchProperty',
+  async (id, {dispatch, extra: api}) => {
+    if (id !== undefined) {
+      dispatch(setPropertyDataLoadingStatus(true));
+      try {
+        const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${id}`);
+        dispatch(setPropertyDataLoadingStatus(false));
+        dispatch(loadProperty(data));
+      } catch {
+        dispatch(setPropertyDataLoadingStatus(false));
+        dispatch(loadProperty(null));
+      }
+    }
+  },
+);
+
+export const fetchNearOffersAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (id, {dispatch, extra: api}) => {
+    if (id !== undefined) {
+      try {
+        const {data} = await api.get<Offer[]>(`${APIRoute.Hotels}/${id}${APIRoute.Nearby}`);
+        dispatch(loadNearOffers(data));
+      }
+      catch {
+        dispatch(loadNearOffers([]));
+      }
+    }
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (id, {dispatch, extra: api}) => {
+    if (id !== undefined) {
+      try {
+        const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
+        dispatch(loadReviews(data));
+      }
+      catch {
+        dispatch(loadReviews([]));
+      }
+    }
+  },
+);
+
+export const commentAction = createAsyncThunk<void, Comment, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async ({ hotelId, comment, rating}, {dispatch, extra: api}) => {
+    await api.post<UserData>(`${APIRoute.Comments}/${hotelId}`, {comment, rating});
+    dispatch(fetchReviewsAction(hotelId.toString()));
+    //dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  },
+);
+
+export const fetchBookmarkAction = createAsyncThunk<void, BookmarkData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffers',
+  async (bookmark, {dispatch, extra: api}) => {
+    if (bookmark.hotelId !== undefined) {
+      try {
+        await api.post<Review[]>(`${APIRoute.Favorite}/${bookmark.hotelId}/${Number(bookmark.status)}`);
+        dispatch(setBookmark(bookmark));
+      }
+      catch {
+        dispatch(setBookmark(null));
+      }
+    }
   },
 );
 

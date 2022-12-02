@@ -14,7 +14,7 @@ const PlaceCardFavorites: PlaceCardAttributes = {
 type PlacesListProps = {
   offers: Offer[];
   classNameAttribute: string;
-  setActiveOffer: (id: Offer | undefined ) => void;
+  setActiveOffer?: (id: Offer | undefined ) => void;
 }
 
 function PlacesList({offers, classNameAttribute, setActiveOffer}: PlacesListProps): JSX.Element {
@@ -25,8 +25,22 @@ function PlacesList({offers, classNameAttribute, setActiveOffer}: PlacesListProp
           key={`${offer.id}-${index}`.toString()}
           offer={offer}
           placeCardAttributes={PlaceCardFavorites}
-          onMouseMove={() => setActiveOffer(offer)}
-          onMouseOut={() => setActiveOffer(undefined)}
+          onMouseMove={
+            () => {
+              if (setActiveOffer === undefined) {
+                return () => null;
+              }
+              return setActiveOffer(offer);
+            }
+          }
+          onMouseOut={
+            () => {
+              if (setActiveOffer === undefined) {
+                return () => null;
+              }
+              return setActiveOffer(undefined);
+            }
+          }
         />
       ))}
     </div>
