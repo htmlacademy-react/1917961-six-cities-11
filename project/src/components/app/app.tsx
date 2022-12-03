@@ -11,9 +11,9 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isQuestionsDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isQuestionsDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingScreen />
     );
@@ -39,7 +39,7 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path={AppRoute.Room}
+          path={AppRoute.Property}
           element={<Property />}
         />
         <Route

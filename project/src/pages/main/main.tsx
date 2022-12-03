@@ -6,7 +6,6 @@ import Map from '../../components/map/map';
 import { Offer } from '../../types/data-types/offer-type';
 import { classNamePlacesListForMain, MapСategory } from '../../const';
 import { useState } from 'react';
-//import { CityDefault } from '../../mocks/offers-mocks';
 import { useAppSelector } from '../../hooks';
 
 function Main(): JSX.Element {

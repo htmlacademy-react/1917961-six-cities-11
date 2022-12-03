@@ -20,7 +20,7 @@ export type PlaceCardProps = {
 }
 
 function PlaceCard({placeCardAttributes, offer, onMouseMove, onMouseOut}: PlaceCardProps): JSX.Element {
-  const { isPremium, isFavorite, previewImage, price, rating, type, id, title } = offer;
+  const { isPremium, previewImage, price, rating, type, id, title } = offer;
   const { card, imageWrapper, cardInfo, imgWidth, imgHeight } = placeCardAttributes;
   const formatedType = type[0].toUpperCase() + type.slice(1);
   return (
@@ -42,7 +42,7 @@ function PlaceCard({placeCardAttributes, offer, onMouseMove, onMouseOut}: PlaceC
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <Bookmark isFavorite={isFavorite} bookmarkAttributes={bookmarkAttributesPlaceCard}/>
+          <Bookmark offer={offer} bookmarkAttributes={bookmarkAttributesPlaceCard}/>
 
         </div>
         <div className="place-card__rating rating">

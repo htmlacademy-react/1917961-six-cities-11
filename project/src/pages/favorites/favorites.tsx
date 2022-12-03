@@ -10,18 +10,18 @@ import { fetchFavoritesAction } from '../../store/api-action';
 function Favorites (): JSX.Element {
   const { favoriteOffers } = useAppSelector((state) => state);
 
-  const citys = [...new Set(favoriteOffers.map((offer) => offer.city.name))];
-  const favoritList = citys.map((city) => {
-    const favoritOffers = favoriteOffers.filter((offer) => offer.city.name === city);
-    return <FavoritesLocationItem key={`${city}`.toString()} city={city} offers={favoritOffers}/>;
-  });
-
   useEffect(() => {
     store.dispatch(fetchFavoritesAction());
     return () => {
       store.dispatch(loadFavoriteOffers([]));
     };
   }, []);
+
+  const citys = [...new Set(favoriteOffers.map((offer) => offer.city.name))];
+  const favoritList = citys.map((city) => {
+    const favoritOffers = favoriteOffers.filter((offer) => offer.city.name === city);
+    return <FavoritesLocationItem key={`${city}`.toString()} city={city} offers={favoritOffers}/>;
+  });
 
   return (
     <div className="page">
