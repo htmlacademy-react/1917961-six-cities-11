@@ -4,10 +4,11 @@ import Header from '../../components/header/header';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
+import { getSelectedCity } from '../../store/offers-data/selectors';
 import { AuthData } from '../../types/auth-data';
 
 function Login (): JSX.Element {
-  const { selectedCity } = useAppSelector((state) => state);
+  const selectedCity = useAppSelector(getSelectedCity);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

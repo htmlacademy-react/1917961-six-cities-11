@@ -14,12 +14,17 @@ import { AuthorizationStatus, classNamePlacesListForProperty, MapСategory } fro
 import { BookmarkAttributes } from '../../types/tags-attributes-types';
 import NotFound from '../not-found/not-found';
 import { useAppSelector } from '../../hooks';
-import { loadProperty } from '../../store/action';
+import { loadProperty } from '../../store/property-data/property-data';
 import { fetchNearOffersAction, fetchPropertyAction, fetchReviewsAction } from '../../store/api-action';
 import { store } from '../../store';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Offer } from '../../types/data-types/offer-type';
 import PropertyHost from '../../components/property-host/property-host';
+import { getSelectedCity } from '../../store/offers-data/selectors';
+import { getProperty, getPropertyDataLoadingStatus } from '../../store/property-data/selectors';
+import { getNearOffersData } from '../../store/near-offers-data/selectors';
+import { getReviewsData } from '../../store/reviews-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 const bookmarkAttributesProperty: BookmarkAttributes = {
   className: 'property__bookmark-button',
@@ -29,7 +34,12 @@ const bookmarkAttributesProperty: BookmarkAttributes = {
 };
 
 function Property(): JSX.Element {
-  const { selectedCity, property, nearOffers, reviews, authorizationStatus, isPropertyDataLoading } = useAppSelector((state) => state);
+  const selectedCity = useAppSelector(getSelectedCity);
+  const property = useAppSelector(getProperty);
+  const nearOffers = useAppSelector(getNearOffersData);
+  const reviews = useAppSelector(getReviewsData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isPropertyDataLoading = useAppSelector(getPropertyDataLoadingStatus);
 
   const { id } = useParams();
 

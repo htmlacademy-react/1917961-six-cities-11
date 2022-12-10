@@ -1,7 +1,8 @@
 import { OptionSorting } from '../../types/option-sorting-type';
 import { MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { loadOffers } from '../../store/action';
+import { loadOffers } from '../../store/offers-data/offers-data';
+import { getOffersData } from '../../store/offers-data/selectors';
 
 type PlacesOptionProps = {
   isActive: boolean;
@@ -11,7 +12,7 @@ type PlacesOptionProps = {
 
 function PlacesOption({isActive, optionSorting, setTypeOffersSort}: PlacesOptionProps ): JSX.Element {
   const dispatch = useAppDispatch();
-  const { offers } = useAppSelector((state) => state);
+  const offers = useAppSelector(getOffersData);
   const offersForSort = [...offers];
   return (
     <li className={`places__option ${isActive ? 'places__option--active' : ''}`} tabIndex={0}

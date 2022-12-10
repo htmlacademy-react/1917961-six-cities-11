@@ -4,6 +4,16 @@ import { OptionSorting } from './types/option-sorting-type';
 
 export const TIMEOUT_SHOW_ERROR = 5000;
 
+export enum NameSpace {
+  OffersData = 'OFFER_DATA',
+  NearOffersData = 'NEAR_OFFER_DATA',
+  PropertyData = 'PROPERTY_DATA',
+  ReviewsData = 'REVIEWS_DATA',
+  FavoriteOffersData = 'FAVORITE_OFFER_DATA',
+  AppProcess = 'APP_PROCESS',
+  User = 'USER',
+}
+
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
