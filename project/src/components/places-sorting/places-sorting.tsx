@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { ListOptionSorting, SORT_DEFAULT } from '../../const';
 import PlacesOption from '../places-option/places-option';
 
@@ -28,4 +28,4 @@ function PlacesSorting(): JSX.Element {
   );
 }
 
-export default PlacesSorting;
+export default memo(PlacesSorting);

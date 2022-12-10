@@ -1,6 +1,7 @@
 import { PlaceCardAttributes } from '../../types/tags-attributes-types';
 import PlaceCard from '../place-card/place-card';
 import { Offer } from '../../types/data-types/offer-type';
+import { memo } from 'react';
 
 
 const PlaceCardFavorites: PlaceCardAttributes = {
@@ -47,4 +48,4 @@ function PlacesList({offers, classNameAttribute, setActiveOffer}: PlacesListProp
   );
 }
 
-export default PlacesList;
+export default memo(PlacesList);

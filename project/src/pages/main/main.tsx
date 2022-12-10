@@ -5,13 +5,17 @@ import Tabs from '../../components/tabs/tabs';
 import Map from '../../components/map/map';
 import { Offer } from '../../types/data-types/offer-type';
 import { classNamePlacesListForMain, MapСategory } from '../../const';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import { getOffersData, getSelectedCity } from '../../store/offers-data/selectors';
 
 function Main(): JSX.Element {
   const [ activeOffer, setActiveOffer ] = useState<Offer>();
 
-  const { selectedCity, offers } = useAppSelector((state) => state);
+  const hundleSetActiveOffer = useCallback((offer: Offer | undefined) => setActiveOffer(offer),[]);
+
+  const offers = useAppSelector(getOffersData);
+  const selectedCity = useAppSelector(getSelectedCity);
   const offersCount = offers.length;
   const isEmptyOffers = !offersCount;
 
@@ -29,7 +33,7 @@ function Main(): JSX.Element {
               <PlacesList
                 offers={offers}
                 classNameAttribute={classNamePlacesListForMain}
-                setActiveOffer={(offer: Offer | undefined) => setActiveOffer(offer)}
+                setActiveOffer={hundleSetActiveOffer}
               />
             </section>
             <div className="cities__right-section">

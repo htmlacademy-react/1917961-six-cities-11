@@ -1,10 +1,12 @@
+import { memo } from 'react';
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import SingIn from '../sing-in/sing-in';
 import SingOut from '../sing-out/sing-out';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   return (
     <header className="header">
       <div className="container">
@@ -25,4 +27,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

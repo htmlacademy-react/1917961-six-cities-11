@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/data-types/offer-type';
 import { BookmarkAttributes, PlaceCardAttributes} from '../../types/tags-attributes-types';
@@ -59,4 +60,4 @@ function PlaceCard({placeCardAttributes, offer, onMouseMove, onMouseOut}: PlaceC
   );
 }
 
-export default PlaceCard;
+export default memo(PlaceCard);

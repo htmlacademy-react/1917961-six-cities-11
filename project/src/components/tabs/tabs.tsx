@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { citys } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectCity } from '../../store/action';
+import { selectCity } from '../../store/offers-data/offers-data';
 import { fetchOffersAction } from '../../store/api-action';
+import { getSelectedCity } from '../../store/offers-data/selectors';
 
 function Tabs(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { selectedCity } = useAppSelector((state) => state);
+  const selectedCity = useAppSelector(getSelectedCity);
   return (
     <React.Fragment>
       <h1 className="visually-hidden">Cities</h1>
@@ -37,4 +38,4 @@ function Tabs(): JSX.Element {
   );
 }
 
-export default Tabs;
+export default memo(Tabs);
