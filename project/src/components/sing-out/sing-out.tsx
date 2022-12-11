@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-action';
+import { getFavoriteOffersData } from '../../store/favorite-offers-data/selectors';
+import { getAuthInfo } from '../../store/user-process/selectors';
 
 function SingOut(): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(getAuthInfo);
+  const favoritesOffer = useAppSelector(getFavoriteOffersData);
 
   const handleOnClick = () => {
     dispatch(logoutAction());
@@ -17,8 +21,8 @@ function SingOut(): JSX.Element {
         <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
-          <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-          <span className="header__favorite-count">3</span>
+          <span className="header__user-name user__name">{user?.email}</span>
+          <span className="header__favorite-count">{favoritesOffer.length}</span>
         </Link>
       </li>
       <li className="header__nav-item">

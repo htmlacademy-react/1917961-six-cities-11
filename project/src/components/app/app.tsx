@@ -1,6 +1,6 @@
 import Main from '../../pages/main/main';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import NotFound from '../../pages/not-found/not-found';
@@ -11,6 +11,8 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getErrorStatus, getOffersDataLoadingStatus } from '../../store/offers-data/selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
+import { store } from '../../store';
+import { fetchFavoritesAction } from '../../store/api-action';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -27,6 +29,10 @@ function App(): JSX.Element {
   if (hasError) {
     return (
       <ErrorScreen />);
+  }
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    store.dispatch(fetchFavoritesAction());
   }
 
   return (

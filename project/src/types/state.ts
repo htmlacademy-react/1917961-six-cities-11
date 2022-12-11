@@ -2,6 +2,7 @@ import {store} from '../store/index';
 import {AuthorizationStatus} from '../const';
 import { City, Offer } from './data-types/offer-type';
 import { Review } from './data-types/reviews-type';
+import { InfoUser } from './auth-data';
 
 export type OffersData = {
   selectedCity: City;
@@ -34,6 +35,7 @@ export type AppProcess = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  authInfo: InfoUser | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

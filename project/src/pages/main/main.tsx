@@ -8,6 +8,7 @@ import { classNamePlacesListForMain, MapСategory } from '../../const';
 import { useCallback, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getOffersData, getSelectedCity } from '../../store/offers-data/selectors';
+import NoOffer from '../../components/no-offer/no-offer';
 
 function Main(): JSX.Element {
   const [ activeOffer, setActiveOffer ] = useState<Offer>();
@@ -24,23 +25,21 @@ function Main(): JSX.Element {
       <Header />
       <main className={`page__main page__main--index ${isEmptyOffers ? 'page__main--index-empty' : ''}`}>
         <Tabs />
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
-              <PlacesSorting />
-              <PlacesList
-                offers={offers}
-                classNameAttribute={classNamePlacesListForMain}
-                setActiveOffer={hundleSetActiveOffer}
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map city={selectedCity} offers={offers} activeOffer={activeOffer} className={MapСategory.Cities}/>
+        {offers.length ?
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+                <PlacesSorting />
+                <PlacesList offers={offers} classNameAttribute={classNamePlacesListForMain} setActiveOffer={hundleSetActiveOffer}/>
+              </section>
+              <div className="cities__right-section">
+                <Map city={selectedCity} offers={offers} activeOffer={activeOffer} className={MapСategory.Cities}/>
+              </div>
             </div>
           </div>
-        </div>
+          : <NoOffer />}
       </main>
     </div>
   );

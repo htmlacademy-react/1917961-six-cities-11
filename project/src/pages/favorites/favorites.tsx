@@ -1,22 +1,11 @@
-import { useEffect } from 'react';
 import FavoritesLocationItem from '../../components/favorites-location-item/favorites-location-item';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
-import { loadFavoriteOffers } from '../../store/favorite-offers-data/favorite-offers-data';
-import { fetchFavoritesAction } from '../../store/api-action';
 import { getFavoriteOffersData } from '../../store/favorite-offers-data/selectors';
 
 function Favorites (): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffersData);
-
-  useEffect(() => {
-    store.dispatch(fetchFavoritesAction());
-    return () => {
-      store.dispatch(loadFavoriteOffers([]));
-    };
-  }, []);
 
   const citys = [...new Set(favoriteOffers.map((offer) => offer.city.name))];
   const favoritList = citys.map((city) => {
