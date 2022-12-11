@@ -62,7 +62,7 @@ function Property(): JSX.Element {
     return <NotFound />;
   }
 
-  const tmp: Offer[] = [property].concat(nearOffers);
+  const OfferAndNearOffers: Offer[] = [property].concat(nearOffers);
 
   return (
     <div className="page">
@@ -108,7 +108,7 @@ function Property(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map city={selectedCity} offers={tmp} activeOffer={property} className={MapСategory.Property}/>
+          <Map city={selectedCity} offers={OfferAndNearOffers} activeOffer={property} className={MapСategory.Property}/>
         </section>
         <div className="container">
           <section className="near-places places">

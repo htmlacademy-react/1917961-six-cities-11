@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { Offer } from '../../types/data-types/offer-type';
 import { PropertyData } from '../../types/state';
-import { fetchPropertyAction } from '../api-action';
+import { fetchBookmarkAction, fetchPropertyAction } from '../api-action';
 
 const initialState: PropertyData = {
   property: null,
@@ -29,6 +29,13 @@ export const propertyData = createSlice({
       .addCase(fetchPropertyAction.rejected, (state, action) => {
         state.property = null;
         state.isPropertyDataLoading = false;
+      })
+      .addCase(fetchBookmarkAction.fulfilled, (state, action) => {
+        if (action.payload !== null) {
+          if (state.property !== null) {
+            state.property.isFavorite = action.payload.status;
+          }
+        }
       });
   }
 });

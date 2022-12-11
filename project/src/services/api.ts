@@ -38,10 +38,10 @@ export const createAPI = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const targetUrl = error.response.config.url;
         const method = error.response.config.method;
-        if (targetUrl === '/login') {toast.warn('Статус пользователя не определен');}
-        if (targetUrl === '/hotels') {toast.warn('Список предложений не загружен');}
-        if (targetUrl?.includes('/comments') && method === 'get') {toast.warn('Список комментариев не загружен');}
-        if (targetUrl?.includes('/comments') && method === 'post') {toast.warn('Комментарий не отправлен');}
+        if (targetUrl === '/login') {toast.warn('User status not defined');}
+        if (targetUrl === '/hotels') {toast.warn('Offer list not loaded');}
+        if (targetUrl?.includes('/comments') && method === 'get') {toast.warn('Comments list not loaded');}
+        if (targetUrl?.includes('/comments') && method === 'post') {toast.warn('Comment not sent');}
 
         if (!targetUrl?.includes('/comments') && targetUrl !== '/login' && targetUrl !== '/hotels')
         {toast.warn(error.response.data.error);}

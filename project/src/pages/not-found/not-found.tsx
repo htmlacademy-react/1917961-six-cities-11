@@ -10,10 +10,10 @@ function NotFound (): JSX.Element {
       <main className="page__main page__main--index">
         <div className="container">
           <div>
-            <h1>Ошибка 404. Страница не существует.</h1>
+            <h1>Error 404. Page does not exist.</h1>
           </div>
           <div>
-            <Link to='/'>Вернуться на главную страницу</Link>
+            <Link to='/'>Go back to main page</Link>
           </div>
         </div>
       </main>
