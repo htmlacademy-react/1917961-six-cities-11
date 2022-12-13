@@ -6,3 +6,4 @@ export const getOffersData = (state: State): Offer[] => state[NameSpace.OffersDa
 export const getOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.OffersData].isOffersDataLoading;
 export const getSelectedCity = (state: State): City => state[NameSpace.OffersData].selectedCity;
 export const getErrorStatus = (state: State): boolean => state[NameSpace.OffersData].hasError;
+export const getBookmark = (state: State): boolean => state[NameSpace.OffersData].isBookmarkSet;

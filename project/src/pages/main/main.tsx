@@ -11,6 +11,7 @@ import { getOffersData, getSelectedCity } from '../../store/offers-data/selector
 import NoOffer from '../../components/no-offer/no-offer';
 
 function Main(): JSX.Element {
+
   const [ activeOffer, setActiveOffer ] = useState<Offer>();
 
   const hundleSetActiveOffer = useCallback((offer: Offer | undefined) => setActiveOffer(offer),[]);

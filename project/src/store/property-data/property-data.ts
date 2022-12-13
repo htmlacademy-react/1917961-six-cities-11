@@ -31,11 +31,7 @@ export const propertyData = createSlice({
         state.isPropertyDataLoading = false;
       })
       .addCase(fetchBookmarkAction.fulfilled, (state, action) => {
-        if (action.payload !== null) {
-          if (state.property !== null) {
-            state.property.isFavorite = action.payload.status;
-          }
-        }
+        state.property = action.payload;
       });
   }
 });

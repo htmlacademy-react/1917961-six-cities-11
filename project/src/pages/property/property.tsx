@@ -83,17 +83,17 @@ function Property(): JSX.Element {
                 <div className="property__stars rating__stars">
                   <RatingStars rating={property.rating}/>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{property.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
                   {property.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {`${property.bedrooms.toString()} Bedrooms`}
+                  {`${property.bedrooms.toString()} ${property.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  {`Max ${property.maxAdults} adults`}
+                  {`Max ${property.maxAdults.toString()} ${property.maxAdults > 1 ? 'adults' : 'adult'}`}
                 </li>
               </ul>
               <div className="property__price">
