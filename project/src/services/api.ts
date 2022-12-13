@@ -2,6 +2,7 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} fro
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
+import { APIRoute } from '../const';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -42,7 +43,7 @@ export const createAPI = (): AxiosInstance => {
         if (targetUrl === '/hotels') {toast.warn('Offer list not loaded');}
         if (targetUrl?.includes('/comments') && method === 'get') {toast.warn('Comments list not loaded');}
         if (targetUrl?.includes('/comments') && method === 'post') {toast.warn('Comment not sent');}
-
+        if (targetUrl?.includes(APIRoute.Favorite) && method === 'post') {toast.warn('Bookmark not set');}
         if (!targetUrl?.includes('/comments') && targetUrl !== '/login' && targetUrl !== '/hotels')
         {toast.warn(error.response.data.error);}
       }

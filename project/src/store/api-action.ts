@@ -43,7 +43,7 @@ export const fetchPropertyAction = createAsyncThunk<Offer | null, string | undef
   'data/fetchProperty',
   async (id, {dispatch, extra: api}) => {
     if (id !== undefined) {
-      const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${id}`);
+      const { data } = await api.get<Offer>(`${APIRoute.Hotels}/${id}`);
       return data;
     }
     return null;
@@ -92,18 +92,15 @@ export const commentAction = createAsyncThunk<void, Comment, {
   },
 );
 
-export const fetchBookmarkAction = createAsyncThunk<BookmarkData | null, BookmarkData, {
+export const fetchBookmarkAction = createAsyncThunk<Offer, BookmarkData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchBookmark',
   async (bookmark, {dispatch, extra: api}) => {
-    if (bookmark.hotelId !== undefined) {
-      await api.post(`${APIRoute.Favorite}/${bookmark.hotelId}/${Number(bookmark.status)}`);
-      return bookmark;
-    }
-    return null;
+    const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${bookmark.hotelId}/${Number(bookmark.status)}`);
+    return data;
   },
 );
 

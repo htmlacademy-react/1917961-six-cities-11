@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { store } from '../../store';
-import { fetchBookmarkAction, fetchFavoritesAction } from '../../store/api-action';
+import { fetchBookmarkAction } from '../../store/api-action';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { BookmarkData } from '../../types/bookmark-data';
 import { Offer } from '../../types/data-types/offer-type';
@@ -19,6 +19,7 @@ function Bookmark({offer, bookmarkAttributes}: BookmarkProps): JSX.Element {
     status: offer.isFavorite
   };
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
   const navigate = useNavigate();
 
   function onBookmarkhandler():void {
@@ -27,7 +28,6 @@ function Bookmark({offer, bookmarkAttributes}: BookmarkProps): JSX.Element {
     } else {
       bookmarkData.status = !bookmarkData.status;
       store.dispatch(fetchBookmarkAction(bookmarkData));
-      store.dispatch(fetchFavoritesAction());
     }
   }
 

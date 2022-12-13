@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-action';
+import { fetchOffersAction, logoutAction } from '../../store/api-action';
 import { getFavoriteOffersData } from '../../store/favorite-offers-data/selectors';
 import { getAuthInfo } from '../../store/user-process/selectors';
 
@@ -13,6 +13,7 @@ function SingOut(): JSX.Element {
 
   const handleOnClick = () => {
     dispatch(logoutAction());
+    dispatch(fetchOffersAction());
   };
 
   return (

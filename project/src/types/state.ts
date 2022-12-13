@@ -9,6 +9,7 @@ export type OffersData = {
   offers: Offer[];
   isOffersDataLoading: boolean;
   hasError: boolean;
+  isBookmarkSet: boolean;
 }
 
 export type NearOffersData = {

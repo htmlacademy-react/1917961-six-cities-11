@@ -9,6 +9,7 @@ const initialState: OffersData = {
   offers: [],
   isOffersDataLoading: false,
   hasError: false,
+  isBookmarkSet: false,
 };
 
 export const offersData = createSlice({
@@ -36,18 +37,18 @@ export const offersData = createSlice({
         state.isOffersDataLoading = false;
         state.hasError = true;
       })
+      .addCase(fetchBookmarkAction.pending, (state) => {
+        state.isBookmarkSet = false;
+      })
       .addCase(fetchBookmarkAction.fulfilled, (state, action) => {
-        if (action.payload !== null) {
-          const offer = state.offers.find((element) => {
-            if (element.id === action.payload?.hotelId) {
-              return true;
-            }
-            return false;
-          });
-          if (offer !== undefined) {
-            offer.isFavorite = action.payload.status;
-          }
+        const index = state.offers.findIndex((element) => (element.id === action.payload.id));
+        if (index !== -1) {
+          state.offers.splice(index,1,action.payload);
         }
+        state.isBookmarkSet = true;
+      })
+      .addCase(fetchBookmarkAction.rejected, (state) => {
+        state.isBookmarkSet = false;
       });
   }
 });
